@@ -115,13 +115,13 @@ export default function App() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-48 overflow-hidden bg-zinc-950">
-          {/* Background Image */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
+        <section className="relative pt-32 pb-48 overflow-hidden">
+          {/* Background Image & Overlay */}
+          <div className="absolute inset-0 -z-10 bg-zinc-950">
             <img 
-              src="/images (9).jpeg" 
+              src="/hero-bg.jpg" 
               alt="Coding Background" 
-              className="w-full h-full object-cover scale-105"
+              className="w-full h-full object-cover scale-105 opacity-40"
               onError={(e) => {
                 // Fallback to a similar high-quality coding image if the uploaded image is not found
                 e.currentTarget.src = "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070";
@@ -165,13 +165,13 @@ export default function App() {
         </section>
 
         {/* AI Pathfinder Section */}
-        <section className="py-24 bg-zinc-900 text-white overflow-hidden relative">
-          {/* Background Image */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
+        <section className="py-24 text-white overflow-hidden relative">
+          {/* Background Image & Overlay */}
+          <div className="absolute inset-0 -z-10 bg-zinc-900">
             <img 
-              src="/images (9).jpeg" 
+              src="/hero-bg.jpg" 
               alt="AI Pathfinder Background" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover opacity-30"
               onError={(e) => {
                 e.currentTarget.src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070";
               }}
