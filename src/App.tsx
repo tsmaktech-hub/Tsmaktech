@@ -115,7 +115,7 @@ export default function App() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-48 overflow-hidden">
+        <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-zinc-950">
             <img 
@@ -136,17 +136,17 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 border border-emerald-500/20">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-6 border border-emerald-500/20">
                 <Sparkles size={14} />
                 Learn to build the future
               </span>
-              <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1]">
-                Master the Art of <br />
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 leading-[1.1]">
+                Master the Art of <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-indigo-400">
                   Modern Development
                 </span>
               </h1>
-              <p className="text-xl text-zinc-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+              <p className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed">
                 Tsmak Tech provides world-class tutorials and paths to help you build professional web apps, websites, and mobile applications.
               </p>
 
@@ -165,7 +165,7 @@ export default function App() {
         </section>
 
         {/* AI Pathfinder Section */}
-        <section className="py-24 text-white overflow-hidden relative">
+        <section className="py-16 md:py-24 text-white overflow-hidden relative">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-zinc-900">
             <img 
@@ -182,22 +182,22 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Not sure where to start?</h2>
-                <p className="text-zinc-400 text-lg mb-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Not sure where to start?</h2>
+                <p className="text-zinc-400 text-base sm:text-lg mb-8">
                   Tell our AI Pathfinder what you're interested in, and we'll create a custom learning roadmap just for you.
                 </p>
-                <div className="flex gap-2 p-2 bg-white/10 rounded-2xl border border-white/10">
+                <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white/10 rounded-2xl border border-white/10">
                   <input 
                     type="text" 
                     placeholder="e.g. I want to build a social media app"
-                    className="flex-grow bg-transparent border-none focus:ring-0 px-4 text-white placeholder:text-zinc-500"
+                    className="flex-grow bg-transparent border-none focus:ring-0 px-4 py-3 text-white placeholder:text-zinc-500 text-sm sm:text-base"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <button 
                     onClick={handleAiPathfinder}
                     disabled={isAiLoading}
-                    className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold rounded-xl transition-colors disabled:opacity-50"
+                    className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold rounded-xl transition-colors disabled:opacity-50 whitespace-nowrap"
                   >
                     {isAiLoading ? 'Thinking...' : 'Find My Path'}
                   </button>
@@ -262,7 +262,7 @@ export default function App() {
         </section>
 
         {/* Learning Paths */}
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
           {/* Subtle Background Pattern/Image */}
           <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
             <img 
@@ -274,9 +274,9 @@ export default function App() {
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Choose Your Focus</h2>
-              <p className="text-zinc-600 max-w-2xl mx-auto">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Choose Your Focus</h2>
+              <p className="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto">
                 Structured paths designed to take you from zero to professional developer in your chosen field.
               </p>
             </div>
@@ -314,7 +314,7 @@ export default function App() {
         </section>
 
         {/* Featured Tutorials */}
-        <section className="py-24 bg-zinc-50 relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-zinc-50 relative overflow-hidden">
           {/* Subtle Background Image */}
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale">
             <img 
@@ -326,12 +326,12 @@ export default function App() {
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-6">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Latest Tutorials</h2>
-                <p className="text-zinc-600">Fresh content added weekly to keep you ahead of the curve.</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Latest Tutorials</h2>
+                <p className="text-zinc-600 text-sm sm:text-base">Fresh content added weekly to keep you ahead of the curve.</p>
               </div>
-              <button className="text-zinc-900 font-bold flex items-center gap-2 hover:text-emerald-600 transition-colors">
+              <button className="text-zinc-900 font-bold flex items-center gap-2 hover:text-emerald-600 transition-colors text-sm sm:text-base">
                 View All Tutorials <ArrowRight size={20} />
               </button>
             </div>
@@ -345,24 +345,24 @@ export default function App() {
         </section>
 
         {/* Newsletter */}
-        <section className="py-24">
+        <section className="py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-emerald-600 rounded-[3rem] p-8 md:p-16 text-center relative overflow-hidden">
+            <div className="bg-emerald-600 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400/20 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
               
               <div className="relative z-10 max-w-2xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Join the Tsmak Tech community</h2>
-                <p className="text-emerald-50 text-lg mb-10">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">Join the Tsmak Tech community</h2>
+                <p className="text-emerald-50 text-base sm:text-lg mb-8 md:mb-10">
                   Get the latest tutorials, tech news, and career tips delivered straight to your inbox. No spam, just value.
                 </p>
-                <form className="flex flex-col sm:flex-row gap-4">
+                <form className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <input 
                     type="email" 
                     placeholder="Enter your email"
-                    className="flex-grow px-6 py-4 rounded-2xl bg-white border-none focus:ring-2 focus:ring-emerald-400 text-zinc-900 placeholder:text-zinc-400"
+                    className="flex-grow px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-white border-none focus:ring-2 focus:ring-emerald-400 text-zinc-900 placeholder:text-zinc-400 text-sm sm:text-base"
                   />
-                  <button className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-colors">
+                  <button className="px-8 py-3 sm:py-4 bg-zinc-900 text-white font-bold rounded-xl sm:rounded-2xl hover:bg-zinc-800 transition-colors text-sm sm:text-base">
                     Subscribe
                   </button>
                 </form>
@@ -373,7 +373,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-zinc-200 pt-20 pb-10">
+      <footer className="bg-white border-t border-zinc-200 pt-12 md:pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-2">
