@@ -39,6 +39,15 @@ export default function App() {
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [logoError, setLogoError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -72,7 +81,12 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+      <nav className={cn(
+        "sticky top-0 z-50 transition-all duration-300 border-b",
+        isScrolled 
+          ? "bg-zinc-950/80 backdrop-blur-md border-white/5 py-3" 
+          : "bg-black border-transparent py-4"
+      )}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-3">
@@ -117,7 +131,7 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-zinc-900 border-b border-white/5 px-4 py-6 space-y-4"
+            className="md:hidden bg-black border-b border-white/5 px-4 py-6 space-y-4"
           >
             <a href="#" className="block text-lg font-medium text-white">Courses</a>
             <a href="#" className="block text-lg font-medium text-white">Tutorials</a>
