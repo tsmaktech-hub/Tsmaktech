@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Layout, 
@@ -24,12 +24,28 @@ import { Tutorial } from './types';
 
 import { TsmakLogo } from './components/Logo';
 
+const HERO_IMAGES = [
+  '/hero-bg.jpg',
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070',
+  'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070',
+  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070',
+  'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070'
+];
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [aiRecommendation, setAiRecommendation] = useState<string | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleAiPathfinder = async () => {
     if (!searchQuery) return;
@@ -118,16 +134,24 @@ export default function App() {
         <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-zinc-950">
-            <img 
-              src="/hero-bg.jpg" 
-              alt="Coding Background" 
-              className="w-full h-full object-cover scale-105 opacity-40"
-              onError={(e) => {
-                // Fallback to a similar high-quality coding image if the uploaded image is not found
-                e.currentTarget.src = "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070";
-              }}
-              referrerPolicy="no-referrer"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={HERO_IMAGES[currentImageIndex]}
+                src={HERO_IMAGES[currentImageIndex]} 
+                alt="Coding Background" 
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 0.4, scale: 1.05 }}
+                exit={{ opacity: 0, scale: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback if an image fails to load
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070";
+                }}
+                referrerPolicy="no-referrer"
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/20 via-transparent to-zinc-950/60" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
