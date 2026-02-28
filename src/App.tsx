@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Layout, 
   Globe, 
@@ -24,8 +24,6 @@ import { Tutorial } from './types';
 
 import { TsmakLogo } from './components/Logo';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,6 +35,11 @@ export default function App() {
     if (!searchQuery) return;
     setIsAiLoading(true);
     try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        throw new Error("GEMINI_API_KEY is not defined");
+      }
+      const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: `A user wants to learn: "${searchQuery}". Based on Tsmak Tech's focus (Web Apps, Websites, Mobile Apps, Backend), recommend a learning path and explain why in 2-3 sentences. Keep it encouraging and professional.`,

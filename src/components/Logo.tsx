@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 export const TsmakLogo = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => {
   const dimensions = {
