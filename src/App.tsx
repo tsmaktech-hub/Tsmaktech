@@ -43,7 +43,7 @@ export default function App() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(timer);
   }, []);
 
