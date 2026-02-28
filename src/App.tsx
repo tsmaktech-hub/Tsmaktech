@@ -132,25 +132,57 @@ export default function App() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.2
+                  }
+                }
+              }}
             >
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-6 border border-emerald-500/20">
+              <motion.span 
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-6 border border-emerald-500/20"
+              >
                 <Sparkles size={14} />
                 Learn to build the future
-              </span>
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 leading-[1.1]">
+              </motion.span>
+              <motion.h1 
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 leading-[1.1]"
+              >
                 Master the Art of <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-indigo-400">
                   Modern Development
                 </span>
-              </h1>
-              <p className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed">
+              </motion.h1>
+              <motion.p 
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed"
+              >
                 Tsmak Tech provides world-class tutorials and paths to help you build professional web apps, websites, and mobile applications.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              >
                 <button className="w-full sm:w-auto px-8 py-4 bg-emerald-600 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20 group">
                   Start Learning Now
                   <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -159,7 +191,7 @@ export default function App() {
                   <Play size={20} className="text-emerald-400" />
                   Watch Demo
                 </button>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -221,9 +253,18 @@ export default function App() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="relative hidden lg:block">
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative hidden lg:block"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-indigo-500 blur-3xl opacity-20" />
-                <div className="relative bg-zinc-800 border border-white/10 rounded-3xl p-8 shadow-2xl">
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative bg-zinc-800 border border-white/10 rounded-3xl p-8 shadow-2xl"
+                >
                   <div className="flex items-center gap-4 mb-8">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500" />
@@ -255,8 +296,8 @@ export default function App() {
                       <span className="text-white">{'}'}</span>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -282,9 +323,13 @@ export default function App() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {LEARNING_PATHS.map((path) => (
+              {LEARNING_PATHS.map((path, index) => (
                 <motion.div
                   key={path.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                   className="p-8 rounded-3xl border border-zinc-100 bg-zinc-50/50 hover:bg-white hover:shadow-xl hover:shadow-zinc-200/50 transition-all group cursor-pointer"
                 >
@@ -337,15 +382,20 @@ export default function App() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {FEATURED_TUTORIALS.map((tutorial) => (
-                <TutorialCard key={tutorial.id} tutorial={tutorial} />
+              {FEATURED_TUTORIALS.map((tutorial, index) => (
+                <TutorialCard key={tutorial.id} tutorial={tutorial} index={index} />
               ))}
             </div>
           </div>
         </section>
 
         {/* Newsletter */}
-        <section className="py-16 md:py-24">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="py-16 md:py-24"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-emerald-600 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
@@ -369,11 +419,16 @@ export default function App() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-zinc-200 pt-12 md:pt-20 pb-10">
+      <motion.footer 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="bg-white border-t border-zinc-200 pt-12 md:pt-20 pb-10"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-2">
@@ -439,14 +494,18 @@ export default function App() {
             </div>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 }
 
-function TutorialCard({ tutorial }: { tutorial: Tutorial }) {
+function TutorialCard({ tutorial, index }: { tutorial: Tutorial, index: number }) {
   return (
     <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
       whileHover={{ y: -8 }}
       className="bg-white rounded-[2rem] overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl hover:shadow-zinc-200/50 transition-all group"
     >
@@ -478,9 +537,13 @@ function TutorialCard({ tutorial }: { tutorial: Tutorial }) {
         <p className="text-zinc-600 text-sm leading-relaxed mb-6 line-clamp-2">
           {tutorial.description}
         </p>
-        <button className="w-full py-3 bg-zinc-50 border border-zinc-100 text-zinc-900 font-bold rounded-xl group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all">
+        <motion.button 
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full py-3 bg-zinc-50 border border-zinc-100 text-zinc-900 font-bold rounded-xl group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all"
+        >
           Start Tutorial
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );

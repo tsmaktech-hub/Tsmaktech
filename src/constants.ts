@@ -39,7 +39,7 @@ export const FEATURED_TUTORIALS: Tutorial[] = [
     category: 'Web App',
     difficulty: 'Beginner',
     duration: '45 mins',
-    image: 'https://picsum.photos/seed/react/800/600',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072',
   },
   {
     id: '2',
@@ -48,7 +48,7 @@ export const FEATURED_TUTORIALS: Tutorial[] = [
     category: 'Website',
     difficulty: 'Intermediate',
     duration: '1.5 hours',
-    image: 'https://picsum.photos/seed/design/800/600',
+    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=2031',
   },
   {
     id: '3',
@@ -57,6 +57,6 @@ export const FEATURED_TUTORIALS: Tutorial[] = [
     category: 'Mobile App',
     difficulty: 'Beginner',
     duration: '1 hour',
-    image: 'https://picsum.photos/seed/mobile/800/600',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2070',
   },
 ];
