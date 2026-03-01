@@ -15,7 +15,11 @@ import {
   ArrowRight,
   Github,
   Twitter,
-  Linkedin
+  Linkedin,
+  Building2,
+  Briefcase,
+  Rocket,
+  ShieldCheck
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { cn } from './lib/utils';
@@ -107,8 +111,16 @@ export default function App() {
             </div>
             
             <div className="hidden md:flex items-center gap-8">
+              <a href="#" className="text-sm font-medium text-white relative py-1">
+                Home
+                <motion.div 
+                  layoutId="activeNav"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-emerald-500 rounded-full"
+                />
+              </a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Courses</a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Tutorials</a>
+              <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Services</a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
               <button className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
                 Get Started
@@ -133,8 +145,10 @@ export default function App() {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden bg-black border-b border-white/5 px-4 py-6 space-y-4"
           >
+            <a href="#" className="block text-lg font-medium text-emerald-400 border-b border-emerald-500/20 pb-1 w-fit">Home</a>
             <a href="#" className="block text-lg font-medium text-white">Courses</a>
             <a href="#" className="block text-lg font-medium text-white">Tutorials</a>
+            <a href="#" className="block text-lg font-medium text-white">Services</a>
             <a href="#" className="block text-lg font-medium text-white">Community</a>
             <button className="w-full bg-emerald-600 text-white py-3 rounded-xl font-medium">
               Get Started
@@ -147,7 +161,7 @@ export default function App() {
         {/* Hero Section */}
         <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden">
           {/* Background Image & Overlay */}
-          <div className="absolute inset-0 -z-10 bg-zinc-950">
+          <div className="absolute inset-0 -z-10 bg-black">
             <AnimatePresence mode="wait">
               <motion.img 
                 key={HERO_IMAGES[currentImageIndex]}
@@ -165,7 +179,7 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
             </AnimatePresence>
-            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/20 via-transparent to-zinc-950/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -237,7 +251,7 @@ export default function App() {
         {/* AI Pathfinder Section */}
         <section className="py-16 md:py-24 text-white overflow-hidden relative">
           {/* Background Image & Overlay */}
-          <div className="absolute inset-0 -z-10 bg-zinc-900">
+          <div className="absolute inset-0 -z-10 bg-black">
             <img 
               src="/hero-bg.jpg" 
               alt="AI Pathfinder Background" 
@@ -392,6 +406,111 @@ export default function App() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Business Solutions Section */}
+        <section className="py-16 md:py-24 bg-zinc-950 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-6">
+                  <Building2 size={14} />
+                  For Businesses & Brands
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  Scale Your Vision with <br />
+                  <span className="text-emerald-400">Professional Solutions</span>
+                </h2>
+                <p className="text-zinc-400 text-lg mb-10 leading-relaxed">
+                  Beyond education, we partner with institutions and brands to build high-performance digital products. From complex web applications to stunning brand websites, we bring your ideas to life.
+                </p>
+                
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center shrink-0 text-emerald-400">
+                      <Briefcase size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">Enterprise Apps</h4>
+                      <p className="text-zinc-500 text-sm">Custom internal tools and management systems.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center shrink-0 text-emerald-400">
+                      <Rocket size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">Brand Websites</h4>
+                      <p className="text-zinc-500 text-sm">High-converting landing pages and portfolios.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center shrink-0 text-emerald-400">
+                      <Smartphone size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">Mobile Solutions</h4>
+                      <p className="text-zinc-500 text-sm">Native-feel cross-platform mobile applications.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center shrink-0 text-emerald-400">
+                      <ShieldCheck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">Secure Portals</h4>
+                      <p className="text-zinc-500 text-sm">Robust security for institutional data access.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button className="mt-12 px-8 py-4 bg-white text-zinc-950 rounded-2xl font-bold hover:bg-zinc-200 transition-all flex items-center gap-2">
+                  Work With Us <ArrowRight size={20} />
+                </button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-emerald-500/20 blur-[120px] rounded-full" />
+                <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015" 
+                    alt="Business Solutions" 
+                    className="w-full aspect-[4/3] object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+                  <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-zinc-950">
+                        99%
+                      </div>
+                      <div>
+                        <h5 className="font-bold">Client Satisfaction</h5>
+                        <p className="text-zinc-400 text-xs">Based on 50+ enterprise projects</p>
+                      </div>
+                    </div>
+                    <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '99%' }}
+                        transition={{ duration: 1.5, delay: 0.5 }}
+                        className="h-full bg-emerald-500" 
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
