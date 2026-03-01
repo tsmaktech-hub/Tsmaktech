@@ -19,7 +19,8 @@ import {
   Building2,
   Briefcase,
   Rocket,
-  ShieldCheck
+  ShieldCheck,
+  ExternalLink
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { cn } from './lib/utils';
@@ -34,6 +35,33 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070',
   'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070',
   'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070'
+];
+
+const PROJECTS = [
+  {
+    id: 'nebula',
+    title: 'Nebula Attendance system',
+    description: 'A collaborative platform designed for modern teams to streamline their workflow and communication.',
+    link: 'https://nebula-group-project.vercel.app',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070',
+    tags: ['Next.js', 'Tailwind', 'Collaborative']
+  },
+  {
+    id: 'group-black',
+    title: 'AttendX Institutional',
+    description: 'An elegant, high-performance web application focused on minimalist design and user experience.',
+    link: 'https://group-project-black.vercel.app',
+    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070',
+    tags: ['React', 'Framer Motion', 'UI/UX']
+  },
+  {
+    id: 'lasustech',
+    title: 'Lasustech Attendance System',
+    description: 'A robust digital attendance management system built for educational institutions to track student presence efficiently.',
+    link: 'https://lasustech-attendance-system.vercel.app',
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=2070',
+    tags: ['Full-stack', 'Database', 'Education']
+  }
 ];
 
 export default function App() {
@@ -411,7 +439,7 @@ export default function App() {
         </section>
 
         {/* Business Solutions Section */}
-        <section className="py-16 md:py-24 bg-zinc-950 text-white overflow-hidden">
+        <section className="py-16 md:py-24 bg-black text-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
@@ -489,7 +517,7 @@ export default function App() {
                     className="w-full aspect-[4/3] object-cover"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                   <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-zinc-950">
@@ -511,6 +539,79 @@ export default function App() {
                   </div>
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Projects Section */}
+        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
+              <div className="max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Featured Projects</h2>
+                <p className="text-zinc-600 text-sm sm:text-base">
+                  A showcase of digital products we've built for businesses, institutions, and community groups. Each project represents our commitment to quality and innovation.
+                </p>
+              </div>
+              <button className="px-6 py-3 bg-zinc-900 text-white rounded-xl font-bold hover:bg-zinc-800 transition-all flex items-center gap-2 whitespace-nowrap">
+                View All Work <ArrowRight size={18} />
+              </button>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {PROJECTS.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
+                >
+                  <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-6 border border-zinc-100 shadow-sm group-hover:shadow-xl group-hover:shadow-zinc-200/50 transition-all">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                      <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-14 h-14 rounded-full bg-white text-zinc-950 flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
+                      >
+                        <ExternalLink size={24} />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-zinc-100 text-zinc-600 text-[10px] font-bold uppercase tracking-wider">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-zinc-900 hover:text-emerald-600 transition-colors"
+                  >
+                    Visit Website <ExternalLink size={14} />
+                  </a>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -626,8 +727,8 @@ export default function App() {
               <ul className="space-y-4">
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Courses</a></li>
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Tutorials</a></li>
+                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</a></li>
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Roadmaps</a></li>
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Pricing</a></li>
               </ul>
             </div>
 
