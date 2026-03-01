@@ -74,6 +74,10 @@ export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    document.title = "Tsmak-Tech Website";
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
