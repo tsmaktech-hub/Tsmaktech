@@ -586,6 +586,7 @@ export default function App() {
               {LEARNING_PATHS.map((path, index) => (
                 <motion.div
                   key={path.id}
+                  onClick={() => setCurrentPage('get-started')}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -936,6 +937,7 @@ export default function App() {
               <ul className="space-y-4">
                 <li><button onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Home</button></li>
                 <li><button onClick={() => setCurrentPage('portfolio')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Portfolio</button></li>
+                <li><button onClick={() => setCurrentPage('get-started')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Get Started</button></li>
                 <li><button onClick={() => scrollToSection('about')} className="text-zinc-500 hover:text-emerald-600 transition-colors">About Us</button></li>
                 <li><button onClick={() => scrollToSection('professional-services')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</button></li>
               </ul>
