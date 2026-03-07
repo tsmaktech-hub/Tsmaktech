@@ -12,6 +12,7 @@ import {
   Menu,
   X,
   Sparkles,
+  ChevronDown,
   ArrowRight,
   Github,
   Twitter,
@@ -66,6 +67,7 @@ const PROJECTS = [
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [aiRecommendation, setAiRecommendation] = useState<string | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -93,15 +95,17 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.services-dropdown')) {
+        setIsServicesOpen(false);
+      }
     };
-  }, [isMenuOpen]);
+    if (isServicesOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isServicesOpen]);
 
   const handleAiPathfinder = async () => {
     if (!searchQuery) return;
@@ -162,8 +166,43 @@ export default function App() {
                 />
               </a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Courses</a>
-              <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Tutorials</a>
-              <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Services</a>
+              <a href="#tutorials" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Tutorials</a>
+              
+              {/* Services Dropdown */}
+              <div className="relative services-dropdown">
+                <button 
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors flex items-center gap-1 py-1"
+                >
+                  Services <ChevronDown size={14} className={cn("transition-transform duration-300", isServicesOpen && "rotate-180")} />
+                </button>
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full left-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
+                    >
+                      <a 
+                        href="#professional-services" 
+                        onClick={() => setIsServicesOpen(false)}
+                        className="block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
+                      >
+                        Hire Us
+                      </a>
+                      <a 
+                        href="#tutorials" 
+                        onClick={() => setIsServicesOpen(false)}
+                        className="block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
+                      >
+                        Learn Development
+                      </a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
               <button className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
                 Get Started
@@ -186,24 +225,46 @@ export default function App() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden fixed inset-0 top-[72px] z-40 bg-black/95 backdrop-blur-xl px-6 py-10 space-y-6 overflow-y-auto"
+            className="md:hidden fixed top-[72px] right-4 left-4 z-40 bg-black/95 backdrop-blur-xl px-6 py-8 rounded-2xl border border-white/10 shadow-2xl space-y-6"
           >
             <div className="flex flex-col gap-6">
-              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-emerald-400 border-b border-emerald-500/20 pb-2 w-fit">Home</a>
-              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Courses</a>
-              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Tutorials</a>
-              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Services</a>
+              <a href="#" className="text-xl font-semibold text-emerald-400 border-b border-emerald-500/20 pb-2 w-fit">Home</a>
+              <a href="#" className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">Courses</a>
+              <a href="#tutorials" className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">Tutorials</a>
+              
+              <div className="space-y-4 services-dropdown">
+                <button 
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="text-xl font-semibold text-white flex items-center justify-between w-full"
+                >
+                  Services
+                  <ChevronDown size={20} className={cn("transition-transform duration-300", isServicesOpen && "rotate-180")} />
+                </button>
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="pl-4 flex flex-col gap-4 overflow-hidden"
+                    >
+                      <a href="#professional-services" className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Hire Us</a>
+                      <a href="#tutorials" className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Learn Development</a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <a 
                 href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors"
+                className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors"
               >
                 Community
               </a>
-              <div className="pt-6">
-                <button className="w-full bg-emerald-600 text-white py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-600/20 active:scale-95 transition-transform">
+              <div className="pt-4">
+                <button className="w-full bg-emerald-600 text-white py-3.5 rounded-xl text-lg font-bold shadow-lg shadow-emerald-600/20 active:scale-95 transition-transform">
                   Get Started
                 </button>
               </div>
@@ -466,7 +527,7 @@ export default function App() {
         </section>
 
         {/* Business Solutions Section */}
-        <section className="py-16 md:py-24 bg-black text-white overflow-hidden">
+        <section id="professional-services" className="py-16 md:py-24 bg-black text-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
@@ -644,7 +705,7 @@ export default function App() {
         </section>
 
         {/* Featured Tutorials */}
-        <section className="py-16 md:py-24 bg-zinc-50 relative overflow-hidden">
+        <section id="tutorials" className="py-16 md:py-24 bg-zinc-50 relative overflow-hidden">
           {/* Subtle Background Image */}
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale">
             <img 
