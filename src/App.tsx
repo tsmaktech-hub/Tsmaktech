@@ -30,6 +30,7 @@ import { Tutorial } from './types';
 
 import { TsmakLogo } from './components/Logo';
 import PortfolioPage from './pages/PortfolioPage';
+import GetStartedPage from './pages/GetStartedPage';
 
 const HERO_IMAGES = [
   '/hero-bg.jpg',
@@ -40,7 +41,7 @@ const HERO_IMAGES = [
 ];
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'portfolio'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'portfolio' | 'get-started'>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -49,6 +50,34 @@ export default function App() {
   const [logoError, setLogoError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const scroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return true;
+      }
+      return false;
+    };
+
+    if (currentPage !== 'home') {
+      setCurrentPage('home');
+      // Wait for page transition to complete before scrolling
+      // Using a longer timeout and a small retry loop to ensure the element is in DOM
+      let attempts = 0;
+      const interval = setInterval(() => {
+        if (scroll() || attempts > 10) {
+          clearInterval(interval);
+        }
+        attempts++;
+      }, 100);
+    } else {
+      scroll();
+    }
+    setIsServicesOpen(false);
+    setIsMenuOpen(false);
+  };
 
   useEffect(() => {
     document.title = "Tsmak-Tech Website";
@@ -190,29 +219,35 @@ export default function App() {
                       exit={{ opacity: 0, y: 10 }}
                       className="absolute top-full left-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
                     >
-                      <a 
-                        href="#professional-services" 
-                        onClick={() => setIsServicesOpen(false)}
-                        className="block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
+                      <button 
+                        onClick={() => scrollToSection('professional-services')}
+                        className="w-full text-left block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
                       >
                         Hire Us
-                      </a>
-                      <a 
-                        href="#tutorials" 
-                        onClick={() => setIsServicesOpen(false)}
-                        className="block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
+                      </button>
+                      <button 
+                        onClick={() => scrollToSection('tutorials')}
+                        className="w-full text-left block px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 transition-colors"
                       >
                         Learn Development
-                      </a>
+                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              <a href="#about" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">About Us</a>
+              <button 
+                onClick={() => scrollToSection('about')} 
+                className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors"
+              >
+                About Us
+              </button>
 
               <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
-              <button className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+              <button 
+                onClick={() => setCurrentPage('get-started')}
+                className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors"
+              >
                 Get Started
               </button>
             </div>
@@ -265,14 +300,19 @@ export default function App() {
                       exit={{ height: 0, opacity: 0 }}
                       className="pl-4 flex flex-col gap-4 overflow-hidden"
                     >
-                      <a href="#professional-services" onClick={() => setIsMenuOpen(false)} className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Hire Us</a>
-                      <a href="#tutorials" onClick={() => setIsMenuOpen(false)} className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Learn Development</a>
+                      <button onClick={() => scrollToSection('professional-services')} className="text-left text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Hire Us</button>
+                      <button onClick={() => scrollToSection('tutorials')} className="text-left text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Learn Development</button>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">About Us</a>
+              <button 
+                onClick={() => scrollToSection('about')} 
+                className="text-left text-xl font-semibold text-white hover:text-emerald-400 transition-colors"
+              >
+                About Us
+              </button>
 
               <a 
                 href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" 
@@ -283,7 +323,10 @@ export default function App() {
                 Community
               </a>
               <div className="pt-4">
-                <button className="w-full bg-emerald-600 text-white py-3.5 rounded-xl text-lg font-bold shadow-lg shadow-emerald-600/20 active:scale-95 transition-transform">
+                <button 
+                  onClick={() => { setCurrentPage('get-started'); setIsMenuOpen(false); }}
+                  className="w-full bg-emerald-600 text-white py-3.5 rounded-xl text-lg font-bold shadow-lg shadow-emerald-600/20 active:scale-95 transition-transform"
+                >
                   Get Started
                 </button>
               </div>
@@ -379,6 +422,7 @@ export default function App() {
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
                 <motion.button 
+                  onClick={() => setCurrentPage('get-started')}
                   animate={{ y: [0, -6, 0] }}
                   transition={{ 
                     duration: 3, 
@@ -634,7 +678,10 @@ export default function App() {
                   </div>
                 </div>
 
-                <button className="mt-12 px-8 py-4 bg-white text-zinc-950 rounded-2xl font-bold hover:bg-zinc-200 transition-all flex items-center gap-2">
+                <button 
+                  onClick={() => setCurrentPage('get-started')}
+                  className="mt-12 px-8 py-4 bg-white text-zinc-950 rounded-2xl font-bold hover:bg-zinc-200 transition-all flex items-center gap-2"
+                >
                   Work With Us <ArrowRight size={20} />
                 </button>
               </motion.div>
@@ -819,7 +866,7 @@ export default function App() {
           </div>
         </motion.section>
       </motion.main>
-    ) : (
+    ) : currentPage === 'portfolio' ? (
       <motion.div
         key="portfolio"
         initial={{ opacity: 0 }}
@@ -828,6 +875,16 @@ export default function App() {
         className="flex-grow"
       >
         <PortfolioPage onBackToHome={() => setCurrentPage('home')} />
+      </motion.div>
+    ) : (
+      <motion.div
+        key="get-started"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="flex-grow"
+      >
+        <GetStartedPage onBack={() => setCurrentPage('home')} />
       </motion.div>
     )}
     </AnimatePresence>
@@ -879,8 +936,8 @@ export default function App() {
               <ul className="space-y-4">
                 <li><button onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Home</button></li>
                 <li><button onClick={() => setCurrentPage('portfolio')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Portfolio</button></li>
-                <li><a href="#about" onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">About Us</a></li>
-                <li><a href="#professional-services" onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</a></li>
+                <li><button onClick={() => scrollToSection('about')} className="text-zinc-500 hover:text-emerald-600 transition-colors">About Us</button></li>
+                <li><button onClick={() => scrollToSection('professional-services')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</button></li>
               </ul>
             </div>
 
