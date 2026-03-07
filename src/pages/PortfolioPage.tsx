@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   ExternalLink, 
   ArrowRight, 
   Mail, 
-  MessageCircle, 
   Star, 
   CheckCircle2, 
   Code2, 
@@ -12,14 +11,16 @@ import {
   Globe, 
   Smartphone,
   Quote,
-  X,
   Briefcase,
-  GraduationCap
+  GraduationCap,
+  MessageCircle
 } from 'lucide-react';
 import { PROJECTS } from '../constants';
+import { TsmakLogo } from '../components/Logo';
 
 interface PortfolioPageProps {
   onBackToHome: () => void;
+  onGetStarted: () => void;
 }
 
 const TESTIMONIALS = [
@@ -56,86 +57,9 @@ const SKILLS = [
   { name: "Cloud & DevOps", icon: <Code2 size={20} />, level: "Intermediate", description: "AWS, Vercel, Docker, CI/CD" }
 ];
 
-const WHATSAPP_NUMBER = "2347087445219";
-const HIRE_MESSAGE = encodeURIComponent("Hello Tsmak Tech, I'm interested in hiring you for a project. I'd like to discuss the details with you.");
-const LEARN_MESSAGE = encodeURIComponent("Hello Tsmak Tech, I'm interested in learning development. Could you provide more information about your training programs?");
-
-export default function PortfolioPage({ onBackToHome }: PortfolioPageProps) {
-  const [showWhatsAppOptions, setShowWhatsAppOptions] = useState(false);
-
+export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioPageProps) {
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-      {/* WhatsApp Modal */}
-      <AnimatePresence>
-        {showWhatsAppOptions && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowWhatsAppOptions(false)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-md bg-zinc-900 border border-white/10 rounded-[2.5rem] p-8 shadow-2xl overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-6">
-                <button 
-                  onClick={() => setShowWhatsAppOptions(false)}
-                  className="p-2 rounded-full hover:bg-white/5 text-zinc-500 hover:text-white transition-colors"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-
-              <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="text-emerald-500" size={32} />
-                </div>
-                <h3 className="text-2xl font-bold text-white">How can we help?</h3>
-                <p className="text-zinc-500 mt-2">Choose an option to start a conversation with us on WhatsApp.</p>
-              </div>
-
-              <div className="space-y-4">
-                <a 
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${HIRE_MESSAGE}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 bg-white/5 border border-white/5 rounded-2xl hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                    <Briefcase size={24} />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-bold text-white">Hire for a Project</h4>
-                    <p className="text-zinc-500 text-sm">I want you to work for me</p>
-                  </div>
-                  <ArrowRight size={20} className="ml-auto text-zinc-600 group-hover:text-emerald-400 transition-colors" />
-                </a>
-
-                <a 
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${LEARN_MESSAGE}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 bg-white/5 border border-white/5 rounded-2xl hover:bg-indigo-500/10 hover:border-indigo-500/30 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
-                    <GraduationCap size={24} />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-bold text-white">Learn Development</h4>
-                    <p className="text-zinc-500 text-sm">I want to learn how to develop</p>
-                  </div>
-                  <ArrowRight size={20} className="ml-auto text-zinc-600 group-hover:text-indigo-400 transition-colors" />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -144,6 +68,9 @@ export default function PortfolioPage({ onBackToHome }: PortfolioPageProps) {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex justify-center mb-8">
+            <TsmakLogo size="lg" />
+          </div>
           <motion.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -344,11 +271,11 @@ export default function PortfolioPage({ onBackToHome }: PortfolioPageProps) {
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <button 
-                  onClick={() => setShowWhatsAppOptions(true)}
+                  onClick={onGetStarted}
                   className="w-full sm:w-auto px-8 py-4 bg-white text-zinc-950 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-zinc-100 transition-all"
                 >
                   <MessageCircle size={24} className="text-emerald-600" />
-                  WhatsApp Us
+                  Get Started
                 </button>
                 <a 
                   href="mailto:tsmaktech@gmail.com" 

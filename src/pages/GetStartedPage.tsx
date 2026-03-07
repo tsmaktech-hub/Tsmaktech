@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   CheckCircle2
 } from 'lucide-react';
+import { TsmakLogo } from '../components/Logo';
 
 interface GetStartedPageProps {
   onBack: () => void;
@@ -18,8 +19,6 @@ type Purpose = 'learning' | 'project' | null;
 
 const WHATSAPP_NUMBER = "2347087445219";
 const COMMUNITY_LINK = "https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea";
-const HIRE_MESSAGE = encodeURIComponent("Hello Tsmak Tech, I'm interested in hiring you for a project. My email is: ");
-
 export default function GetStartedPage({ onBack }: GetStartedPageProps) {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -58,8 +57,11 @@ export default function GetStartedPage({ onBack }: GetStartedPageProps) {
               <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
               Back
             </button>
-            <div className="text-xl font-black tracking-tighter">
-              TSMAK<span className="text-emerald-500">.</span>TECH
+            <div className="flex items-center gap-2">
+              <TsmakLogo size="sm" />
+              <div className="text-xl font-black tracking-tighter">
+                TSMAK<span className="text-emerald-500">.</span>TECH
+              </div>
             </div>
             <div className="w-20" /> {/* Spacer */}
           </div>

@@ -875,7 +875,10 @@ export default function App() {
         exit={{ opacity: 0 }}
         className="flex-grow"
       >
-        <PortfolioPage onBackToHome={() => setCurrentPage('home')} />
+        <PortfolioPage 
+          onBackToHome={() => setCurrentPage('home')} 
+          onGetStarted={() => setCurrentPage('get-started')}
+        />
       </motion.div>
     ) : (
       <motion.div
