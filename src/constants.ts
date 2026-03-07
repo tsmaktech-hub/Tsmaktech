@@ -60,3 +60,30 @@ export const FEATURED_TUTORIALS: Tutorial[] = [
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2070',
   },
 ];
+
+export const PROJECTS = [
+  {
+    id: 'nebula',
+    title: 'Nebula Attendance system',
+    description: 'A collaborative platform designed for modern teams to streamline their workflow and communication.',
+    link: 'https://nebula-group-project.vercel.app',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070',
+    tags: ['Next.js', 'Tailwind', 'Collaborative']
+  },
+  {
+    id: 'group-black',
+    title: 'AttendX Institutional',
+    description: 'An elegant, high-performance web application focused on minimalist design and user experience.',
+    link: 'https://group-project-black.vercel.app',
+    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070',
+    tags: ['React', 'Framer Motion', 'UI/UX']
+  },
+  {
+    id: 'lasustech',
+    title: 'Lasustech Attendance System',
+    description: 'A robust digital attendance management system built for educational institutions to track student presence efficiently.',
+    link: 'https://lasustech-attendance-system.vercel.app',
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=2070',
+    tags: ['Full-stack', 'Database', 'Education']
+  }
+];

@@ -25,10 +25,11 @@ import {
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { cn } from './lib/utils';
-import { LEARNING_PATHS, FEATURED_TUTORIALS } from './constants';
+import { PROJECTS, LEARNING_PATHS, FEATURED_TUTORIALS } from './constants';
 import { Tutorial } from './types';
 
 import { TsmakLogo } from './components/Logo';
+import PortfolioPage from './pages/PortfolioPage';
 
 const HERO_IMAGES = [
   '/hero-bg.jpg',
@@ -38,34 +39,8 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070'
 ];
 
-const PROJECTS = [
-  {
-    id: 'nebula',
-    title: 'Nebula Attendance system',
-    description: 'A collaborative platform designed for modern teams to streamline their workflow and communication.',
-    link: 'https://nebula-group-project.vercel.app',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070',
-    tags: ['Next.js', 'Tailwind', 'Collaborative']
-  },
-  {
-    id: 'group-black',
-    title: 'AttendX Institutional',
-    description: 'An elegant, high-performance web application focused on minimalist design and user experience.',
-    link: 'https://group-project-black.vercel.app',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070',
-    tags: ['React', 'Framer Motion', 'UI/UX']
-  },
-  {
-    id: 'lasustech',
-    title: 'Lasustech Attendance System',
-    description: 'A robust digital attendance management system built for educational institutions to track student presence efficiently.',
-    link: 'https://lasustech-attendance-system.vercel.app',
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=2070',
-    tags: ['Full-stack', 'Database', 'Education']
-  }
-];
-
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'portfolio'>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -142,7 +117,10 @@ export default function App() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-3">
               {!logoError ? (
-                <div className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-white/10 bg-zinc-900 group cursor-pointer">
+                <div 
+                  className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-white/10 bg-zinc-900 group cursor-pointer"
+                  onClick={() => setCurrentPage('home')}
+                >
                   <img 
                     src="/logo.png" 
                     alt="Tsmak Tech Logo" 
@@ -152,21 +130,49 @@ export default function App() {
                   />
                 </div>
               ) : (
-                <TsmakLogo />
+                <div onClick={() => setCurrentPage('home')} className="cursor-pointer">
+                  <TsmakLogo />
+                </div>
               )}
-              <span className="text-xl font-bold tracking-tight text-white">Tsmak Tech</span>
+              <span 
+                className="text-xl font-bold tracking-tight text-white cursor-pointer"
+                onClick={() => setCurrentPage('home')}
+              >
+                Tsmak <span className="text-emerald-400">Tech</span>
+              </span>
             </div>
             
             <div className="hidden md:flex items-center gap-8">
-              <a href="#" className="text-sm font-medium text-white relative py-1">
+              <button 
+                onClick={() => setCurrentPage('home')} 
+                className={cn(
+                  "text-sm font-medium relative py-1 transition-colors",
+                  currentPage === 'home' ? "text-white" : "text-zinc-400 hover:text-emerald-400"
+                )}
+              >
                 Home
-                <motion.div 
-                  layoutId="activeNav"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-emerald-500 rounded-full"
-                />
-              </a>
-              <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Courses</a>
-              <a href="#tutorials" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Tutorials</a>
+                {currentPage === 'home' && (
+                  <motion.div 
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-emerald-500 rounded-full"
+                  />
+                )}
+              </button>
+              <button 
+                onClick={() => setCurrentPage('portfolio')} 
+                className={cn(
+                  "text-sm font-medium relative py-1 transition-colors",
+                  currentPage === 'portfolio' ? "text-white" : "text-zinc-400 hover:text-emerald-400"
+                )}
+              >
+                Portfolio
+                {currentPage === 'portfolio' && (
+                  <motion.div 
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-emerald-500 rounded-full"
+                  />
+                )}
+              </button>
               
               {/* Services Dropdown */}
               <div className="relative services-dropdown">
@@ -203,6 +209,8 @@ export default function App() {
                 </AnimatePresence>
               </div>
 
+              <a href="#about" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">About Us</a>
+
               <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
               <button className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
                 Get Started
@@ -222,15 +230,24 @@ export default function App() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden fixed top-[72px] right-4 left-4 z-40 bg-black/95 backdrop-blur-xl px-6 py-8 rounded-2xl border border-white/10 shadow-2xl space-y-6"
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            className="md:hidden fixed top-20 right-4 w-72 z-[60] bg-black/95 backdrop-blur-xl px-6 py-8 rounded-3xl border border-white/10 shadow-2xl space-y-6"
           >
             <div className="flex flex-col gap-6">
-              <a href="#" className="text-xl font-semibold text-emerald-400 border-b border-emerald-500/20 pb-2 w-fit">Home</a>
-              <a href="#" className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">Courses</a>
-              <a href="#tutorials" className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">Tutorials</a>
+              <button 
+                onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }} 
+                className={cn("text-left text-xl font-bold transition-colors", currentPage === 'home' ? "text-emerald-400" : "text-white")}
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => { setCurrentPage('portfolio'); setIsMenuOpen(false); }} 
+                className={cn("text-left text-xl font-bold transition-colors", currentPage === 'portfolio' ? "text-emerald-400" : "text-white")}
+              >
+                Portfolio
+              </button>
               
               <div className="space-y-4 services-dropdown">
                 <button 
@@ -248,12 +265,14 @@ export default function App() {
                       exit={{ height: 0, opacity: 0 }}
                       className="pl-4 flex flex-col gap-4 overflow-hidden"
                     >
-                      <a href="#professional-services" className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Hire Us</a>
-                      <a href="#tutorials" className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Learn Development</a>
+                      <a href="#professional-services" onClick={() => setIsMenuOpen(false)} className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Hire Us</a>
+                      <a href="#tutorials" onClick={() => setIsMenuOpen(false)} className="text-lg text-zinc-400 hover:text-emerald-400 transition-colors">Learn Development</a>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
+
+              <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-xl font-semibold text-white hover:text-emerald-400 transition-colors">About Us</a>
 
               <a 
                 href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" 
@@ -273,9 +292,17 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden">
+      <AnimatePresence mode="wait">
+        {currentPage === 'home' ? (
+          <motion.main 
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex-grow"
+          >
+            {/* Hero Section */}
+        <section id="about" className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden scroll-mt-20">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-black">
             <AnimatePresence mode="wait">
@@ -351,14 +378,31 @@ export default function App() {
                 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <button className="w-full sm:w-auto px-8 py-4 bg-emerald-600 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20 group">
+                <motion.button 
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                  className="w-full sm:w-auto px-8 py-4 bg-emerald-600 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20 group"
+                >
                   Start Learning Now
                   <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="w-full sm:w-auto px-8 py-4 bg-white/10 border border-white/10 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-white/20 transition-all backdrop-blur-sm">
+                </motion.button>
+                <motion.button 
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                  className="w-full sm:w-auto px-8 py-4 bg-white/10 border border-white/10 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-white/20 transition-all backdrop-blur-sm"
+                >
                   <Play size={20} className="text-emerald-400" />
                   Watch Demo
-                </button>
+                </motion.button>
               </motion.div>
             </motion.div>
           </div>
@@ -394,13 +438,17 @@ export default function App() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <button 
+                  <motion.button 
                     onClick={handleAiPathfinder}
                     disabled={isAiLoading}
+                    animate={{ 
+                      boxShadow: ["0 0 0px rgba(16, 185, 129, 0)", "0 0 15px rgba(16, 185, 129, 0.3)", "0 0 0px rgba(16, 185, 129, 0)"] 
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold rounded-xl transition-colors disabled:opacity-50 whitespace-nowrap"
                   >
                     {isAiLoading ? 'Thinking...' : 'Find My Path'}
-                  </button>
+                  </motion.button>
                 </div>
                 
                 <AnimatePresence>
@@ -527,7 +575,7 @@ export default function App() {
         </section>
 
         {/* Business Solutions Section */}
-        <section id="professional-services" className="py-16 md:py-24 bg-black text-white overflow-hidden">
+        <section id="professional-services" className="py-16 md:py-24 bg-black text-white overflow-hidden scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
@@ -632,7 +680,7 @@ export default function App() {
         </section>
 
         {/* Featured Projects Section */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+        <section id="portfolio" className="py-16 md:py-24 bg-white relative overflow-hidden scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
               <div className="max-w-2xl">
@@ -641,7 +689,10 @@ export default function App() {
                   A showcase of digital products we've built for businesses, institutions, and community groups. Each project represents our commitment to quality and innovation.
                 </p>
               </div>
-              <button className="px-6 py-3 bg-zinc-900 text-white rounded-xl font-bold hover:bg-zinc-800 transition-all flex items-center gap-2 whitespace-nowrap">
+              <button 
+                onClick={() => setCurrentPage('portfolio')}
+                className="px-6 py-3 bg-zinc-900 text-white rounded-xl font-bold hover:bg-zinc-800 transition-all flex items-center gap-2 whitespace-nowrap"
+              >
                 View All Work <ArrowRight size={18} />
               </button>
             </div>
@@ -652,6 +703,7 @@ export default function App() {
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -10 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   className="group"
@@ -705,7 +757,7 @@ export default function App() {
         </section>
 
         {/* Featured Tutorials */}
-        <section id="tutorials" className="py-16 md:py-24 bg-zinc-50 relative overflow-hidden">
+        <section id="tutorials" className="py-16 md:py-24 bg-zinc-50 relative overflow-hidden scroll-mt-20">
           {/* Subtle Background Image */}
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale">
             <img 
@@ -766,7 +818,19 @@ export default function App() {
             </div>
           </div>
         </motion.section>
-      </main>
+      </motion.main>
+    ) : (
+      <motion.div
+        key="portfolio"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="flex-grow"
+      >
+        <PortfolioPage onBackToHome={() => setCurrentPage('home')} />
+      </motion.div>
+    )}
+    </AnimatePresence>
 
       {/* Footer */}
       <motion.footer 
@@ -813,10 +877,10 @@ export default function App() {
             <div>
               <h4 className="font-bold text-zinc-900 mb-6 uppercase text-xs tracking-widest">Platform</h4>
               <ul className="space-y-4">
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Courses</a></li>
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Tutorials</a></li>
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</a></li>
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Roadmaps</a></li>
+                <li><button onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Home</button></li>
+                <li><button onClick={() => setCurrentPage('portfolio')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Portfolio</button></li>
+                <li><a href="#about" onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">About Us</a></li>
+                <li><a href="#professional-services" onClick={() => setCurrentPage('home')} className="text-zinc-500 hover:text-emerald-600 transition-colors">Services</a></li>
               </ul>
             </div>
 
@@ -824,7 +888,7 @@ export default function App() {
               <h4 className="font-bold text-zinc-900 mb-6 uppercase text-xs tracking-widest">Support</h4>
               <ul className="space-y-4">
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Community</a></li>
+                <li><a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-emerald-600 transition-colors">Community</a></li>
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Contact</a></li>
                 <li><a href="#" className="text-zinc-500 hover:text-emerald-600 transition-colors">Privacy Policy</a></li>
               </ul>
@@ -833,10 +897,10 @@ export default function App() {
           
           <div className="border-t border-zinc-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-zinc-400 text-sm">
-              © 2024 Tsmak Tech. All rights reserved.
+              © 2026 Tsmak Tech. All rights reserved.
             </p>
             <div className="flex gap-8">
-              <span className="text-zinc-400 text-sm">Built with React & Gemini</span>
+              <span className="text-zinc-400 text-sm">Built by the founder of Tsmak Tech.</span>
             </div>
           </div>
         </div>

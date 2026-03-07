@@ -15,3 +15,12 @@ export interface LearningPath {
   icon: string;
   color: string;
 }
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  tags: string[];
+}
