@@ -257,7 +257,7 @@ export default function App() {
                 }}
                 className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed"
               >
-                Tsmak Tech provides world-class tutorials and paths to help you build professional web apps, websites, and mobile applications.
+                Tsmak Tech provides world-class tutorials and paths to help you build professional web apps, websites, and mobile applications. We also specialize in building high-performance web applications and websites for companies, brands, and organizations.
               </motion.p>
 
               <motion.div 
