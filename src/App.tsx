@@ -1004,13 +1004,20 @@ function TutorialCard({ tutorial, index }: { tutorial: Tutorial, index: number }
         <p className="text-zinc-600 text-sm leading-relaxed mb-6 line-clamp-2">
           {tutorial.description}
         </p>
-        <motion.button 
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full py-3 bg-zinc-50 border border-zinc-100 text-zinc-900 font-bold rounded-xl group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all"
+        <a 
+          href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block w-full"
         >
-          Start Tutorial
-        </motion.button>
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-zinc-50 border border-zinc-100 text-zinc-900 font-bold rounded-xl group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all"
+          >
+            Start Tutorial
+          </motion.button>
+        </a>
       </div>
     </motion.div>
   );
