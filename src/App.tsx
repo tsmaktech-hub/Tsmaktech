@@ -92,6 +92,17 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const handleAiPathfinder = async () => {
     if (!searchQuery) return;
     setIsAiLoading(true);
@@ -172,19 +183,31 @@ export default function App() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-black border-b border-white/5 px-4 py-6 space-y-4"
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden fixed inset-0 top-[72px] z-40 bg-black/95 backdrop-blur-xl px-6 py-10 space-y-6 overflow-y-auto"
           >
-            <a href="#" className="block text-lg font-medium text-emerald-400 border-b border-emerald-500/20 pb-1 w-fit">Home</a>
-            <a href="#" className="block text-lg font-medium text-white">Courses</a>
-            <a href="#" className="block text-lg font-medium text-white">Tutorials</a>
-            <a href="#" className="block text-lg font-medium text-white">Services</a>
-            <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="block text-lg font-medium text-white">Community</a>
-            <button className="w-full bg-emerald-600 text-white py-3 rounded-xl font-medium">
-              Get Started
-            </button>
+            <div className="flex flex-col gap-6">
+              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-emerald-400 border-b border-emerald-500/20 pb-2 w-fit">Home</a>
+              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Courses</a>
+              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Tutorials</a>
+              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors">Services</a>
+              <a 
+                href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-semibold text-white hover:text-emerald-400 transition-colors"
+              >
+                Community
+              </a>
+              <div className="pt-6">
+                <button className="w-full bg-emerald-600 text-white py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-600/20 active:scale-95 transition-transform">
+                  Get Started
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
