@@ -153,7 +153,7 @@ export default function App() {
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Courses</a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Tutorials</a>
               <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Services</a>
-              <a href="#" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
+              <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-zinc-400 hover:text-emerald-400 transition-colors">Community</a>
               <button className="bg-white text-zinc-950 px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
                 Get Started
               </button>
@@ -181,7 +181,7 @@ export default function App() {
             <a href="#" className="block text-lg font-medium text-white">Courses</a>
             <a href="#" className="block text-lg font-medium text-white">Tutorials</a>
             <a href="#" className="block text-lg font-medium text-white">Services</a>
-            <a href="#" className="block text-lg font-medium text-white">Community</a>
+            <a href="https://chat.whatsapp.com/IV6sRV0HRYU2vl7o8kYHea" target="_blank" rel="noopener noreferrer" className="block text-lg font-medium text-white">Community</a>
             <button className="w-full bg-emerald-600 text-white py-3 rounded-xl font-medium">
               Get Started
             </button>
