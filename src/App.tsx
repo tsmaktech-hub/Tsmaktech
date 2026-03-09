@@ -61,8 +61,10 @@ export default function App() {
       return false;
     };
 
-    if (currentPage !== 'home') {
-      setCurrentPage('home');
+    const targetPage = sectionId === 'about' ? 'portfolio' : 'home';
+
+    if (currentPage !== targetPage) {
+      setCurrentPage(targetPage);
       // Wait for page transition to complete before scrolling
       // Using a longer timeout and a small retry loop to ensure the element is in DOM
       let attempts = 0;
@@ -78,6 +80,10 @@ export default function App() {
     setIsServicesOpen(false);
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   useEffect(() => {
     document.title = "Tsmak-Tech Website";
@@ -345,7 +351,7 @@ export default function App() {
             className="flex-grow"
           >
             {/* Hero Section */}
-        <section id="about" className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden scroll-mt-20">
+        <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden scroll-mt-20">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-black">
             <AnimatePresence mode="wait">

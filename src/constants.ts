@@ -63,6 +63,14 @@ export const FEATURED_TUTORIALS: Tutorial[] = [
 
 export const PROJECTS = [
   {
+    id: 'islamic-gpt',
+    title: 'Tsmak-Islamic GPT',
+    description: 'An Islamic web app that answers all Islamic related questions with evidence from the Quran and Hadith.',
+    link: 'https://tsmakislamicgpt.vercel.app',
+    image: '/logo1.png',
+    tags: ['AI', 'Islamic', 'GPT']
+  },
+  {
     id: 'nebula',
     title: 'Nebula Attendance system',
     description: 'A collaborative platform designed for modern teams to streamline their workflow and communication.',

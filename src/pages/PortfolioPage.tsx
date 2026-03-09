@@ -211,7 +211,7 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
       </section>
 
       {/* About Us Section */}
-      <section className="py-24 bg-zinc-900/30">
+      <section id="about" className="py-24 bg-zinc-900/30 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
