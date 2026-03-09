@@ -157,7 +157,7 @@ export default function App() {
                   onClick={() => setCurrentPage('home')}
                 >
                   <img 
-                    src="logo1.png" 
+                    src="/logo1.png" 
                     alt="Tsmak Tech Logo" 
                     className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
                     onError={() => setLogoError(true)}
