@@ -122,7 +122,7 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-contain bg-zinc-900 group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain bg-white group-hover:scale-110 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
