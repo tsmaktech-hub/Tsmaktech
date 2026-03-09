@@ -82,7 +82,7 @@ export const PROJECTS = [
     id: 'group-black',
     title: 'AttendX Institutional',
     description: 'An elegant, high-performance web application focused on minimalist design and user experience.',
-    link: 'https://group-project-black.vercel.app',
+    link: 'https://group-project-teal-seven.vercel.app',
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070',
     tags: ['React', 'Framer Motion', 'UI/UX']
   },

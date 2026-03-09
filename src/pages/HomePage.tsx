@@ -428,7 +428,9 @@ export default function HomePage() {
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-full object-contain bg-zinc-50 group-hover:scale-110 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute top-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">

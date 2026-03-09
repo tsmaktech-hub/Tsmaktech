@@ -123,7 +123,9 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                     src={project.image} 
                     alt={project.title} 
                     className="w-full h-full object-contain bg-white group-hover:scale-110 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
+                    }}
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                     <a 
