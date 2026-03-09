@@ -4,7 +4,7 @@ export const LEARNING_PATHS: LearningPath[] = [
   {
     id: 'web-apps',
     title: 'Web Applications',
-    description: 'Maters React, Next.js, and modern full-stack development.',
+    description: 'Master React, Next.js, and modern full-stack development.',
     icon: 'Layout',
     color: 'emerald',
   },

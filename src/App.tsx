@@ -405,7 +405,7 @@ export default function App() {
                 }}
                 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 leading-[1.1]"
               >
-                Maters the Art of <br className="hidden sm:block" />
+                Master the Art of <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-indigo-400">
                   Modern Development
                 </span>
