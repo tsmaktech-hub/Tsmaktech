@@ -100,12 +100,13 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-zinc-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="h-px flex-grow bg-white/10" />
-            <h2 className="text-2xl font-bold uppercase tracking-widest text-zinc-500">Top Projects</h2>
-            <div className="h-px flex-grow bg-white/10" />
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Featured Projects</h2>
+            <p className="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto">
+              A showcase of digital products we've built for businesses, institutions, and community groups. Each project represents our commitment to quality and innovation.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -114,20 +115,22 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-zinc-950 rounded-3xl overflow-hidden border border-white/5 hover:border-emerald-500/50 transition-all"
+                className="group"
               >
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-6 border border-zinc-100 shadow-sm group-hover:shadow-xl group-hover:shadow-zinc-200/50 transition-all">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-contain bg-white group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={(e) => {
                       e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
                     }}
+                    referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                     <a 
                       href={project.link} 
                       target="_blank" 
@@ -138,29 +141,27 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                     </a>
                   </div>
                 </div>
-                <div className="p-8">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full bg-zinc-900 border border-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-wider">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-                  >
-                    Visit Website <ExternalLink size={14} />
-                  </a>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="px-3 py-1 rounded-full bg-zinc-100 text-zinc-600 text-[10px] font-bold uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
+                <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+                  {project.description}
+                </p>
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-500 transition-colors"
+                >
+                  Visit Website <ExternalLink size={14} />
+                </a>
               </motion.div>
             ))}
           </div>

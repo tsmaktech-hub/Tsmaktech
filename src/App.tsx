@@ -47,7 +47,6 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [aiRecommendation, setAiRecommendation] = useState<string | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(false);
-  const [logoError, setLogoError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -151,24 +150,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-3">
-              {!logoError ? (
-                <div 
-                  className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-white/10 bg-zinc-900 group cursor-pointer"
-                  onClick={() => setCurrentPage('home')}
-                >
-                  <img 
-                    src="/logo1.png" 
-                    alt="Tsmak Tech Logo" 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    onError={() => setLogoError(true)}
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              ) : (
-                <div onClick={() => setCurrentPage('home')} className="cursor-pointer">
-                  <TsmakLogo />
-                </div>
-              )}
+              <div onClick={() => setCurrentPage('home')} className="cursor-pointer">
+                <TsmakLogo />
+              </div>
               <span 
                 className="text-xl font-bold tracking-tight text-white cursor-pointer"
                 onClick={() => setCurrentPage('home')}
@@ -910,19 +894,7 @@ export default function App() {
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                {!logoError ? (
-                  <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-200 bg-white">
-                    <img 
-                      src="/logo1.png" 
-                      alt="Tsmak Tech Logo" 
-                      className="w-full h-full object-cover"
-                      onError={() => setLogoError(true)}
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ) : (
-                  <TsmakLogo size="sm" />
-                )}
+                <TsmakLogo size="sm" />
                 <span className="text-lg font-bold tracking-tight text-zinc-900">Tsmak Tech</span>
               </div>
               <p className="text-zinc-500 max-w-sm mb-8">
