@@ -126,9 +126,9 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                 whileHover={{ y: -10 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group"
+                className="group bg-zinc-900/50 border border-white/5 p-6 rounded-[2rem] hover:border-emerald-500/30 transition-all"
               >
-                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-6 border border-white/10 shadow-sm group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-all">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-sm group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-all">
                   <img 
                     src={project.image} 
                     alt={project.title} 
