@@ -1,4 +1,5 @@
 import { Tutorial, LearningPath } from './types';
+import logo1 from './assets/logo1.png';
 
 export const LEARNING_PATHS: LearningPath[] = [
   {
@@ -67,7 +68,7 @@ export const PROJECTS = [
     title: 'Tsmak-Islamic GPT',
     description: 'An Islamic web app that answers all Islamic related questions with evidence from the Quran and Hadith.',
     link: 'https://tsmakislamicgpt.vercel.app',
-    image: '/logo1.png',
+    image: logo1,
     tags: ['AI', 'Islamic', 'GPT']
   },
   {
