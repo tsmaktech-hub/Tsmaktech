@@ -99,14 +99,22 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* Top Project */}
+      <section id="portfolio" className="py-16 md:py-24 bg-black relative overflow-hidden scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 mb-4">Featured Projects</h2>
-            <p className="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto">
-              A showcase of digital products we've built for businesses, institutions, and community groups. Each project represents our commitment to quality and innovation.
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Top Project</h2>
+              <p className="text-zinc-400 text-sm sm:text-base">
+                A showcase of digital products we've built for businesses, institutions, and community groups. Each project represents our commitment to quality and innovation.
+              </p>
+            </div>
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="px-6 py-3 bg-white text-zinc-950 rounded-xl font-bold hover:bg-zinc-100 transition-all flex items-center gap-2 whitespace-nowrap"
+            >
+              Back to Top <ArrowRight size={18} className="-rotate-90" />
+            </button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -120,7 +128,7 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-6 border border-zinc-100 shadow-sm group-hover:shadow-xl group-hover:shadow-zinc-200/50 transition-all">
+                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-6 border border-white/10 shadow-sm group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-all">
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -143,22 +151,22 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full bg-zinc-100 text-zinc-600 text-[10px] font-bold uppercase tracking-wider">
+                    <span key={tag} className="px-3 py-1 rounded-full bg-white/10 text-zinc-400 text-[10px] font-bold uppercase tracking-wider">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+                <p className="text-zinc-400 text-sm leading-relaxed mb-4">
                   {project.description}
                 </p>
                 <a 
                   href={project.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-500 transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
                   Visit Website <ExternalLink size={14} />
                 </a>
