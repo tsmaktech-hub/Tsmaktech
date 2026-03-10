@@ -23,7 +23,7 @@ import { LEARNING_PATHS, FEATURED_TUTORIALS, PROJECTS } from '../constants';
 import { Tutorial } from '../types';
 
 const HERO_IMAGES = [
-  '/hero-bg.jpg',
+  '/hero.jpg',
   'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070',
   'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070',
   'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070',

@@ -67,7 +67,7 @@ export const PROJECTS = [
     title: 'Tsmak-Islamic GPT',
     description: 'An Islamic web app that answers all Islamic related questions with evidence from the Quran and Hadith.',
     link: 'https://tsmakislamicgpt.vercel.app',
-    image: '/hero-bg.jpg',
+    image: '/hero.jpg',
     tags: ['AI', 'Islamic', 'GPT']
   },
   {
