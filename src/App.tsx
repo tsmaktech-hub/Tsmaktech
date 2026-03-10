@@ -335,7 +335,7 @@ export default function App() {
             className="flex-grow"
           >
             {/* Hero Section */}
-        <section className="relative pt-20 pb-24 md:pt-32 md:pb-48 overflow-hidden scroll-mt-20">
+        <section className="relative min-h-[85vh] flex items-center justify-center pt-24 pb-24 overflow-hidden scroll-mt-20">
           {/* Background Image & Overlay */}
           <div className="absolute inset-0 -z-10 bg-black">
             <AnimatePresence mode="wait">
