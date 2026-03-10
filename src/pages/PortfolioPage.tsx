@@ -132,9 +132,11 @@ export default function PortfolioPage({ onBackToHome, onGetStarted }: PortfolioP
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain bg-zinc-900 group-hover:scale-110 transition-transform duration-500"
                     onError={(e) => {
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
+                      if (project.image.startsWith('http')) {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070";
+                      }
                     }}
                     referrerPolicy="no-referrer"
                   />
