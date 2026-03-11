@@ -66,7 +66,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[100vh] flex items-center justify-center pt-20 overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center pt-20 overflow-hidden">
         {/* Background Images with Crossfade */}
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode="wait">
@@ -164,7 +164,7 @@ export default function HomePage() {
       </section>
 
       {/* AI Pathfinder Section */}
-      <section className="py-16 md:py-24 text-white overflow-hidden relative">
+      <section className="py-12 md:py-20 text-white overflow-hidden relative">
         <div className="absolute inset-0 -z-10 bg-black">
           <img 
             src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070" 
@@ -293,7 +293,7 @@ export default function HomePage() {
       </section>
 
       {/* Professional Services Section */}
-      <section id="professional-services" className="py-16 md:py-24 bg-zinc-950 text-white scroll-mt-20">
+      <section id="professional-services" className="py-12 md:py-20 bg-zinc-950 text-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
