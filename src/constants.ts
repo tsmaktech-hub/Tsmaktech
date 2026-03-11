@@ -75,7 +75,7 @@ export const PROJECTS = [
     title: 'Nebula Attendance system',
     description: 'A collaborative platform designed for modern teams to streamline their workflow and communication.',
     link: 'https://nebula-group-project.vercel.app',
-    image: 'https://picsum.photos/seed/nebula/1920/1080',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070',
     tags: ['Next.js', 'Tailwind', 'Collaborative']
   },
   {
@@ -91,7 +91,7 @@ export const PROJECTS = [
     title: 'Lasustech Attendance System',
     description: 'A robust digital attendance management system built for educational institutions to track student presence efficiently.',
     link: 'https://lasustech-attendance-system.vercel.app',
-    image: 'https://picsum.photos/seed/lasustech/1920/1080',
+    image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070',
     tags: ['Full-stack', 'Database', 'Education']
   }
 ];
